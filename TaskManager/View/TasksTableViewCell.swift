@@ -13,7 +13,7 @@ class TasksTableViewCell: UITableViewCell {
 
     lazy var taskLabel: UILabel = {
        var label = UILabel()
-       label.font = UIFont(name: "Avenir-Light", size: 14)
+       label.font = UIFont(name: "Avenir", size: 14)
        label.textColor = UIColor.black
        label.lineBreakMode = NSLineBreakMode.byWordWrapping
        label.numberOfLines = 0
@@ -22,7 +22,7 @@ class TasksTableViewCell: UITableViewCell {
     
     lazy var deadlineLabel: UILabel = {
        var label = UILabel()
-       label.font = UIFont(name: "Avenir-Light", size: 10)
+       label.font = UIFont(name: "Avenir", size: 10)
        label.textColor = UIColor.black
        return label
     }()

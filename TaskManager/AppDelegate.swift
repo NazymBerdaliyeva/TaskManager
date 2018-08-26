@@ -21,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+        
         let homeViewController = UINavigationController(rootViewController: HomeController())
         window!.rootViewController = homeViewController
+        UINavigationBar.appearance().tintColor = UIColor.init(red: 0.5686, green: 0.6902, blue: 0.9882, alpha: 0.9)
         return true
     }
 

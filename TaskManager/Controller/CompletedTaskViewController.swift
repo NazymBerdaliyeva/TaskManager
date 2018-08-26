@@ -27,7 +27,12 @@ class CompletedTaskViewController: UIViewController {
     func configureView() {
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(completedTaskTableView)
+        
+        let backImage = UIImage(named: "close")
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
     }
+    
     func configureConstraints() {
         completedTaskTableView <- Edges(0)
     }
@@ -36,7 +41,12 @@ class CompletedTaskViewController: UIViewController {
         configureView()
         configureConstraints()
         fetchCompletedTasks()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     func fetchCompletedTasks() {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {

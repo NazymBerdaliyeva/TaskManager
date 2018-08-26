@@ -8,14 +8,17 @@
 
 import UIKit
 import EasyPeasy
+import CoreData
 
 class AddViewController: UIViewController, PizzaDelegate {
 
+    var name: String = ""
+    
     lazy var taskNameLabel: UILabel = {
         var label = UILabel()
         label.text = "The Task"
         label.font = UIFont(name: "Avenir-Light", size: 18)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(hexString: "#F68B2C")
         return label
     }()
     
@@ -23,6 +26,7 @@ class AddViewController: UIViewController, PizzaDelegate {
         var label = UILabel()
         label.text = "Deadline"
         label.font = UIFont(name: "Avenir-Light", size: 18)
+        label.textColor = UIColor(hexString: "#F68B2C")
         return label
     }()
     
@@ -30,6 +34,7 @@ class AddViewController: UIViewController, PizzaDelegate {
         var label = UILabel()
         label.text = "Category"
         label.font = UIFont(name: "Avenir-Light", size: 18)
+        label.textColor = UIColor(hexString: "#F68B2C")
         return label
     }()
     
@@ -50,7 +55,6 @@ class AddViewController: UIViewController, PizzaDelegate {
     
     lazy var chooseCategoryButton: UIButton = {
         var button = UIButton()
-//        button.setTitle("General", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.contentHorizontalAlignment = .left
         button.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
@@ -95,7 +99,7 @@ class AddViewController: UIViewController, PizzaDelegate {
         }
         self.chooseCategoryButton.addSubview(categoryImgView)
         self.chooseCategoryButton.addSubview(categoryNameLabel)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0.5686, green: 0.6902, blue: 0.9882, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(hexString: "#C6DA02")
         self.view.backgroundColor = UIColor.white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(tappedButton))
         self.navigationItem.rightBarButtonItem?.isEnabled = false
@@ -115,7 +119,7 @@ class AddViewController: UIViewController, PizzaDelegate {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
-        
+       
     }
     
     func configureConstraints() {
@@ -168,6 +172,7 @@ class AddViewController: UIViewController, PizzaDelegate {
         super.viewDidLoad()
         configurView()
         configureConstraints()
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -175,12 +180,16 @@ class AddViewController: UIViewController, PizzaDelegate {
         addBottomBorderLine(deadlineTextField)
     }
    
-    func onPizzaReady(type: String)
+    func chosedCategory(nameofCategory: String, colourValue: String)
     {
-        
-        print("Pizza ready. The best pizza of all pizzas is... \(type)")
-        self.categoryNameLabel.text = type
+        print("Pizza ready. The best pizza of all pizzas is... \(nameofCategory)")
+        name = nameofCategory
+        print(name)
+        self.categoryNameLabel.text = name
+        categoryImgView.backgroundColor = UIColor(hexString: nameofCategory)
+      //  self.categoryNameLabel.text = type
     }
+    
     @objc func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -196,11 +205,10 @@ class AddViewController: UIViewController, PizzaDelegate {
     @objc func tappedButton() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let task = Task(context: context)
-        
         task.text = taskTextField.text!
         task.deadline = deadlineTextField.text!
-        task.categoryName = categoryNameLabel.text!
-//        task.categoryColour = toString(categoryImgView.backgroundColor)
+        task.categoryName = categoryNameLabel.text
+//        task.categoryColour = c
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         

@@ -12,19 +12,13 @@ import CoreData
 
 protocol PizzaDelegate
 {
-    func onPizzaReady(type: String)
+    func chosedCategory(nameofCategory: String, colourValue: String)
 }
 
 class CategoryViewController: UIViewController {
 
-   
-    
     var categoryList: [Category] = []
-    var categoryValues: [NSManagedObject] = []
-    
-    var delegate:PizzaDelegate?
-    
-    
+    var delegate:PizzaDelegate? = nil
     
     var categoriesArray = [CategoryDetailStruct(name: "Sport", colour: "#ff0000"),
                            CategoryDetailStruct(name: "Health & Fitness", colour: "#ff8000"),
@@ -54,8 +48,6 @@ class CategoryViewController: UIViewController {
         self.view.addSubview(categoryTableView)
     }
     func configureConstraints() {
-//        let foobar = AppDelegate.foobar
-        
         categoryTableView <- Edges(0)
     }
     override func viewDidLoad() {
@@ -66,22 +58,21 @@ class CategoryViewController: UIViewController {
         saveToCoreData()
         fetchCategory()
         
-        var vc = AddViewController()
+        let vc = AddViewController()
         self.delegate = vc
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = ""
     }
     @objc func addCategory() {
         
-        if (delegate != nil){
-            let info = "Nazym"
-            delegate!.onPizzaReady(type: info)
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            print("DELEGATE is nil")
-        }
+//        if (delegate != nil){
+//            let info = "Nazym"
+//            delegate!.tappedButton(type: info)
+//            self.navigationController?.popViewController(animated: true)
+//        } else {
+//            print("DELEGATE is nil")
+//        }
         
 //        self.navigationController?.pushViewController(AddViewController(), animated: true)
     }
@@ -176,14 +167,15 @@ extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (delegate != nil){
             let info = categoryList[indexPath.row].name
-            delegate!.onPizzaReady(type: info!)
-            self.navigationController?.popViewController(animated: true)
+            let colour = categoryList[indexPath.row].colour
+            delegate!.chosedCategory(nameofCategory: info!, colourValue: colour!)
+            self.navigationController?.popViewController(animated: false)
         } else {
             print("delegate is nil")
         }
         
-         let vc = AddViewController()
-       vc.categoryNameLabel.text = categoryList[indexPath.row].name
+//         let vc = AddViewController()
+//       vc.categoryNameLabel.text = categoryList[indexPath.row].name
 //        self.dismiss(animated: true, completion: nil)
     //        vc.categoryImgView.backgroundColor = UIColor(hexString: categoryList[indexPath.row].colour!)
 //        vc.categoryNameLabel.text = categoryList[indexPath.row].name

@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController {
     lazy var notificationLabel: UILabel = {
         var label = UILabel()
         label.text = "Enable notifications"
-        label.font = UIFont(name: "Avenir-Light", size: 18)
+        label.font = UIFont(name: "Avenir", size: 18)
         return label
     }()
     
@@ -31,7 +31,7 @@ class SettingsViewController: UIViewController {
     lazy var newCategoryBtn: UIButton = {
         var button = UIButton()
         button.setTitle("Create a new category", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Avenir-Light", size: 18)
+        button.titleLabel?.font = UIFont(name: "Avenir", size: 18)
         button.setTitleColor(.black, for: .normal)
         button.sizeToFit()
         button.contentHorizontalAlignment = .left

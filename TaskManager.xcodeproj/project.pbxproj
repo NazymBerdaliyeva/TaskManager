@@ -20,7 +20,9 @@
 		04739290212E9430000C7836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0473928E212E9430000C7836 /* LaunchScreen.storyboard */; };
 		0473929D212EA627000C7836 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473929C212EA627000C7836 /* TasksTableViewCell.swift */; };
 		0473929F21306B05000C7836 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473929E21306B05000C7836 /* AddViewController.swift */; };
+		048C09A421333240009503B1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048C09A321333240009503B1 /* Default@2x.png */; };
 		04EB59D02132BF1E0049679B /* CompletedTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB59CF2132BF1E0049679B /* CompletedTaskViewController.swift */; };
+		04F92E12213336940071166E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F92E11213336940071166E /* Default.png */; };
 		E3FCFDE234FC1CBBABAB3EAC /* Pods_TaskManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4375F591EBECE92D2FBD192 /* Pods_TaskManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +43,9 @@
 		04739291212E9430000C7836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0473929C212EA627000C7836 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		0473929E21306B05000C7836 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		048C09A321333240009503B1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		04EB59CF2132BF1E0049679B /* CompletedTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskViewController.swift; sourceTree = "<group>"; };
+		04F92E11213336940071166E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7DCD168AC37E448F82F424D1 /* Pods-TaskManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskManager/Pods-TaskManager.debug.xcconfig"; sourceTree = "<group>"; };
 		C4375F591EBECE92D2FBD192 /* Pods_TaskManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FB450D233652AF6E7BD383 /* Pods-TaskManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskManager/Pods-TaskManager.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +66,8 @@
 		04739276212E9430000C7836 = {
 			isa = PBXGroup;
 			children = (
+				04F92E11213336940071166E /* Default.png */,
+				048C09A321333240009503B1 /* Default@2x.png */,
 				04739281212E9430000C7836 /* TaskManager */,
 				04739280212E9430000C7836 /* Products */,
 				3656452F04EFB5AA660228FE /* Pods */,
@@ -208,9 +214,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048C09A421333240009503B1 /* Default@2x.png in Resources */,
 				04739290212E9430000C7836 /* LaunchScreen.storyboard in Resources */,
 				0473928D212E9430000C7836 /* Assets.xcassets in Resources */,
 				04739288212E9430000C7836 /* Main.storyboard in Resources */,
+				04F92E12213336940071166E /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +425,7 @@
 			baseConfigurationReference = 7DCD168AC37E448F82F424D1 /* Pods-TaskManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = TaskManager/TaskManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4QKU98VAAA;
@@ -434,6 +443,7 @@
 			baseConfigurationReference = D7FB450D233652AF6E7BD383 /* Pods-TaskManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = TaskManager/TaskManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4QKU98VAAA;

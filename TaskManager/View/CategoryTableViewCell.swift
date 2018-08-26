@@ -22,7 +22,7 @@ class CategoryTableViewCell: UITableViewCell {
     }()
     lazy var categoryNameLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "Avenir-Light", size: 18)
+        label.font = UIFont(name: "Avenir", size: 18)
         label.textColor = UIColor.black
         
         return label

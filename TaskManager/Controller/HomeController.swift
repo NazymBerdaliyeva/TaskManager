@@ -48,7 +48,7 @@ class HomeController: UIViewController {
         var button = UIButton()
         button.setTitle("Show Completed", for: .normal)
         button.addTarget(self, action: #selector(showCompletedToDo), for: .touchUpInside)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor(hexString: "#C6DA02"), for: .normal)
         button.sizeToFit()
         return button
     }()
@@ -62,10 +62,11 @@ class HomeController: UIViewController {
         
         self.view.addSubview(firstView)
         self.navigationItem.title = "To Do"
-        self.navigationController?.navigationBar.tintColor = UIColor.init(red: 0.5686, green: 0.6902, blue: 0.9882, alpha: 0.9)
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "add"), style: .plain, target: self, action: #selector(addToDo))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(goToSettingsVC))
         checkIfEmpty()
+        self.navigationController?.navigationBar.tintColor = UIColor(hexString: "#C6DA02")
     }
     
     func configureConstraints() {
@@ -106,20 +107,9 @@ class HomeController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc func showCompletedToDo() {
+        navigationItem.title = nil
         let vc = CompletedTaskViewController()
         self.navigationController?.pushViewController(vc, animated: false)
-        //present(vc, animated: false, completion: nil)
-//        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        let context = delegate.persistentContainer.viewContext
-//
-//        do {
-//            //toDoTasks = try context.fetch(CompletedTask.fetchRequest()) as! [Task]
-//            toDosTableView.reloadData()
-//        } catch {
-//            print("Fetching failed")
-//        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,9 +216,5 @@ extension HomeController: UITableViewDataSource {
         checkIfEmpty()
         return UISwipeActionsConfiguration(actions: [action])
     }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let label = toDoTasks[indexPath.row].text
-//        
-//    }
 }
 
