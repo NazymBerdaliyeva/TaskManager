@@ -16,9 +16,16 @@
         <attribute name="deadline" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Todo" representedClassName="Todo" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="colour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deadline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Category" positionX="205" positionY="18" width="128" height="75"/>
         <element name="CompletedTask" positionX="72" positionY="18" width="128" height="105"/>
         <element name="Task" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Todo" positionX="81" positionY="36" width="128" height="105"/>
     </elements>
 </model>

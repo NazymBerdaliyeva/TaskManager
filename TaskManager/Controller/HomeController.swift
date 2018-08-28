@@ -11,7 +11,7 @@ import EasyPeasy
 
 class HomeController: UIViewController {
 
-    var toDoTasks: [Task] = []
+    var toDoTasks: [Todo] = []
     var completedToDoTasks: [CompletedTask] = []
     
     lazy var firstView: UIView = {
@@ -115,7 +115,6 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         configureViews()
         configureConstraints()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -142,7 +141,7 @@ class HomeController: UIViewController {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         do {
-            toDoTasks = try context.fetch(Task.fetchRequest())
+            toDoTasks = try context.fetch(Todo.fetchRequest())
         } catch {
             print("Fetching failed")
         }
@@ -166,7 +165,7 @@ extension HomeController: UITableViewDataSource {
         let task = toDoTasks[indexPath.row]
         cell?.taskLabel.text = task.text!
         cell?.deadlineLabel.text = task.deadline
-        //cell?.categoryImageView.backgroundColor = UIColor(hexString: task.categoryColour! as! String)
+        cell?.categoryImageView.backgroundColor = UIColor(hexString: task.colour!)
         return cell!
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -183,7 +182,7 @@ extension HomeController: UITableViewDataSource {
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
             do {
-                toDoTasks = try context.fetch(Task.fetchRequest())
+                toDoTasks = try context.fetch(Todo.fetchRequest())
             } catch {
                 print("Fetching failed")
             }
@@ -193,7 +192,7 @@ extension HomeController: UITableViewDataSource {
         checkIfEmpty()
     }
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .destructive, title: "Check") { (action, view, completion) in
+        let action = UIContextualAction(style: .normal, title: "Completed") { (action, view, completion) in
             completion(true)
     }
         action.image = #imageLiteral(resourceName: "tick")
@@ -203,18 +202,22 @@ extension HomeController: UITableViewDataSource {
         let completedtask = CompletedTask(context: context)
         completedtask.text = toDoTasks[indexPath.row].text
         completedtask.deadline = toDoTasks[indexPath.row].deadline
+        let colour = toDoTasks[indexPath.row].colour
+        completedtask.categoryColour = colour
         context.delete(toDoTasks[indexPath.row])
         
         //completedtask.categoryColour = toDoTasks[indexPath.row].categoryColour
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         do {
-            toDoTasks = try context.fetch(Task.fetchRequest())
+            toDoTasks = try context.fetch(Todo.fetchRequest())
         } catch {
             print("Fetching failed")
         }
         toDosTableView.reloadData()
         checkIfEmpty()
         return UISwipeActionsConfiguration(actions: [action])
+        
+        
     }
 }
 

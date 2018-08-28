@@ -10,15 +10,9 @@ import UIKit
 import EasyPeasy
 import CoreData
 
-protocol PizzaDelegate
-{
-    func chosedCategory(nameofCategory: String, colourValue: String)
-}
-
 class CategoryViewController: UIViewController {
 
     var categoryList: [Category] = []
-    var delegate:PizzaDelegate? = nil
     
     var categoriesArray = [CategoryDetailStruct(name: "Sport", colour: "#ff0000"),
                            CategoryDetailStruct(name: "Health & Fitness", colour: "#ff8000"),
@@ -44,7 +38,6 @@ class CategoryViewController: UIViewController {
     }()
     func configureView() {
         self.view.backgroundColor = UIColor.white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add to the task", style: .plain, target: self, action: #selector(addCategory))
         self.view.addSubview(categoryTableView)
     }
     func configureConstraints() {
@@ -57,26 +50,11 @@ class CategoryViewController: UIViewController {
         deleteCategory()
         saveToCoreData()
         fetchCategory()
-        
-        let vc = AddViewController()
-        self.delegate = vc
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = ""
     }
-    @objc func addCategory() {
-        
-//        if (delegate != nil){
-//            let info = "Nazym"
-//            delegate!.tappedButton(type: info)
-//            self.navigationController?.popViewController(animated: true)
-//        } else {
-//            print("DELEGATE is nil")
-//        }
-        
-//        self.navigationController?.pushViewController(AddViewController(), animated: true)
-    }
-    
+
     func saveToCoreData() {
         for category in categoriesArray {
             let name = category.name
@@ -165,21 +143,11 @@ extension CategoryViewController: UITableViewDataSource {
         return true
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (delegate != nil){
-            let info = categoryList[indexPath.row].name
-            let colour = categoryList[indexPath.row].colour
-            delegate!.chosedCategory(nameofCategory: info!, colourValue: colour!)
-            self.navigationController?.popViewController(animated: false)
-        } else {
-            print("delegate is nil")
-        }
-        
-//         let vc = AddViewController()
-//       vc.categoryNameLabel.text = categoryList[indexPath.row].name
-//        self.dismiss(animated: true, completion: nil)
-    //        vc.categoryImgView.backgroundColor = UIColor(hexString: categoryList[indexPath.row].colour!)
-//        vc.categoryNameLabel.text = categoryList[indexPath.row].name
-//        self.navigationController?.pushViewController(vc, animated: false)
+        let name = categoryList[indexPath.row].name
+        let colour = categoryList[indexPath.row].colour
+        UserDefaults.standard.set(name, forKey: "categoryName")
+        UserDefaults.standard.set(colour, forKey: "categoryColour")
+        self.navigationController?.popViewController(animated: false)
         
     }
 }

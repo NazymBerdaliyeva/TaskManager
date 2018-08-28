@@ -10,9 +10,9 @@ import UIKit
 import EasyPeasy
 import CoreData
 
-class AddViewController: UIViewController, PizzaDelegate {
+class AddViewController: UIViewController {
 
-    var name: String = ""
+    var name: String?
     
     lazy var taskNameLabel: UILabel = {
         var label = UILabel()
@@ -119,7 +119,13 @@ class AddViewController: UIViewController, PizzaDelegate {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
-       
+  
+        categoryNameLabel.text = UserDefaults.standard.string(forKey: "categoryName")
+        guard UserDefaults.standard.string(forKey: "categoryColour") != nil else {return}
+        categoryImgView.backgroundColor = UIColor(hexString: (UserDefaults.standard.string(forKey: "categoryColour"))!)
+        UserDefaults.standard.removeObject(forKey: "categoryName")
+
+        
     }
     
     func configureConstraints() {
@@ -172,22 +178,11 @@ class AddViewController: UIViewController, PizzaDelegate {
         super.viewDidLoad()
         configurView()
         configureConstraints()
-        
     }
 
     override func viewDidLayoutSubviews() {
         addBottomBorderLine(taskTextField)
         addBottomBorderLine(deadlineTextField)
-    }
-   
-    func chosedCategory(nameofCategory: String, colourValue: String)
-    {
-        print("Pizza ready. The best pizza of all pizzas is... \(nameofCategory)")
-        name = nameofCategory
-        print(name)
-        self.categoryNameLabel.text = name
-        categoryImgView.backgroundColor = UIColor(hexString: nameofCategory)
-      //  self.categoryNameLabel.text = type
     }
     
     @objc func datePickerValueChanged(sender:UIDatePicker) {
@@ -204,12 +199,14 @@ class AddViewController: UIViewController, PizzaDelegate {
     }
     @objc func tappedButton() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let task = Task(context: context)
+        let task = Todo(context: context)
         task.text = taskTextField.text!
         task.deadline = deadlineTextField.text!
-        task.categoryName = categoryNameLabel.text
-//        task.categoryColour = c
+        task.category = categoryNameLabel.text
+        let k = UserDefaults.standard.string(forKey: "categoryColour")
+        task.colour = k!
         
+        UserDefaults.standard.removeObject(forKey: "categoryColour")
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         let nextVC = HomeController()
@@ -222,6 +219,9 @@ class AddViewController: UIViewController, PizzaDelegate {
         }
     }
 
+
+   
+    
     func addBottomBorderLine(_ textField: UITextField) {
         let border = CALayer()
         let width = CGFloat(1.0)
